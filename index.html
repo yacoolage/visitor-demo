@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>访客管理系统 Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>公司访客管理系统（前端 Demo）</h1>
+        <p>仅前端 + Mock 数据联动，覆盖预约、预检、签到、在场、签退、沉淀流程</p>
+      </div>
+      <button id="resetBtn" class="btn secondary">重置数据</button>
+    </header>
+
+    <main class="layout">
+      <aside class="panel">
+        <h2>今日访客列表</h2>
+        <div id="visitorList" class="visitor-list"></div>
+      </aside>
+
+      <section class="panel main-panel">
+        <h2>流程看板</h2>
+        <div id="pipeline" class="pipeline"></div>
+
+        <div class="actions">
+          <h3>流程操作</h3>
+          <div class="btn-row">
+            <button id="approveBtn" class="btn">审批通过</button>
+            <button id="checkInBtn" class="btn">签到</button>
+            <button id="enterZoneBtn" class="btn">进入在场</button>
+            <button id="delayBtn" class="btn">延时30分钟</button>
+            <button id="checkOutBtn" class="btn">签退</button>
+            <button id="markExceptionBtn" class="btn danger">标记异常</button>
+          </div>
+          <p id="actionHint" class="hint">请选择一位访客后操作。</p>
+        </div>
+
+        <div class="records">
+          <h3>事件日志</h3>
+          <ul id="eventLog"></ul>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>运营指标（实时）</h2>
+        <div id="metrics" class="metrics"></div>
+
+        <h2>当前访客详情</h2>
+        <div id="visitorDetail" class="detail empty">请先选择访客</div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
