@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>访客管理系统 Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>公司访客管理系统（前端 Demo）</h1>
+        <p>覆盖预约、预检、签到、在场、签退、沉淀与异常处理（Mock 数据联动）</p>
+      </div>
+      <div class="header-actions">
+        <button id="resetBtn" class="btn secondary">重置数据</button>
+      </div>
+    </header>
+
+    <nav class="scene-tabs" id="sceneTabs">
+      <button class="tab active" data-scene="dashboard">总览看板</button>
+      <button class="tab" data-scene="reservation">预约管理</button>
+      <button class="tab" data-scene="precheck">来访前预检</button>
+      <button class="tab" data-scene="checkin">到场签到</button>
+      <button class="tab" data-scene="invisit">在场管理</button>
+      <button class="tab" data-scene="checkout">离场签退</button>
+      <button class="tab" data-scene="analytics">沉淀报表</button>
+      <button class="tab" data-scene="exception">异常处理</button>
+    </nav>
+
+    <main class="scene-container">
+      <section class="scene active" id="scene-dashboard">
+        <div class="layout">
+          <aside class="panel">
+            <h2>今日访客列表</h2>
+            <div id="visitorList" class="visitor-list"></div>
+          </aside>
+
+          <section class="panel main-panel">
+            <h2>流程看板</h2>
+            <div id="pipeline" class="pipeline"></div>
+
+            <div class="actions">
+              <h3>流程操作</h3>
+              <div class="btn-row">
+                <button id="approveBtn" class="btn">审批通过</button>
+                <button id="checkInBtn" class="btn">签到</button>
+                <button id="enterZoneBtn" class="btn">进入在场</button>
+                <button id="delayBtn" class="btn">延时30分钟</button>
+                <button id="checkOutBtn" class="btn">签退</button>
+                <button id="markExceptionBtn" class="btn danger">标记异常</button>
+              </div>
+              <p id="actionHint" class="hint">请选择一位访客后操作。</p>
+            </div>
+
+            <div class="records">
+              <h3>事件日志</h3>
+              <ul id="eventLog"></ul>
+            </div>
+          </section>
+
+          <aside class="panel">
+            <h2>运营指标（实时）</h2>
+            <div id="metrics" class="metrics"></div>
+
+            <h2>当前访客详情</h2>
+            <div id="visitorDetail" class="detail empty">请先选择访客</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-reservation">
+        <div class="panel">
+          <h2>预约管理</h2>
+          <form id="reservationForm" class="form-grid">
+            <label>访客姓名<input id="fName" required /></label>
+            <label>所属公司<input id="fCompany" required /></label>
+            <label>访客类型
+              <select id="fType">
+                <option>客户</option>
+                <option>合作方</option>
+                <option>面试</option>
+                <option>施工</option>
+                <option>配送</option>
+              </select>
+            </label>
+            <label>被访人<input id="fHost" required /></label>
+            <label>预约时间<input id="fTime" type="time" value="14:00" required /></label>
+            <label>预计离场<input id="fLeave" type="time" value="15:00" required /></label>
+            <label class="span2">来访事由<input id="fPurpose" placeholder="请输入来访目的" required /></label>
+            <button class="btn" type="submit">新增预约</button>
+          </form>
+          <h3>预约列表</h3>
+          <table class="table" id="reservationTable"></table>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-precheck">
+        <div class="panel">
+          <h2>来访前预检</h2>
+          <p class="hint">模拟隐私授权、黑名单比对、信息完整度校验。</p>
+          <table class="table" id="precheckTable"></table>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-checkin">
+        <div class="panel">
+          <h2>到场签到</h2>
+          <p class="hint">支持扫码、证件识别、人脸、现场补录（Demo 以状态模拟）。</p>
+          <table class="table" id="checkinTable"></table>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-invisit">
+        <div class="panel">
+          <h2>在场管理</h2>
+          <div id="zoneCards" class="zone-cards"></div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-checkout">
+        <div class="panel">
+          <h2>离场签退</h2>
+          <table class="table" id="checkoutTable"></table>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-analytics">
+        <div class="panel">
+          <h2>沉淀报表</h2>
+          <div class="kpi-grid" id="kpiGrid"></div>
+          <h3>按访客类型统计</h3>
+          <div id="typeStats" class="type-stats"></div>
+        </div>
+      </section>
+
+      <section class="scene" id="scene-exception">
+        <div class="panel">
+          <h2>异常处理工单</h2>
+          <table class="table" id="exceptionTable"></table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
